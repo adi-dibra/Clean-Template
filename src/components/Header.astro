@@ -1,0 +1,80 @@
+---
+const navItems = [
+  { href: '/', text: 'Hem' },
+  { href: '/services', text: 'Tjänster' },
+  { href: '/projects', text: 'Projekt' },
+  { href: '/about', text: 'Om Oss' },
+  { href: '/sustainability', text: 'Hållbarhet' },
+  { href: '/contact', text: 'Kontakt' },
+];
+---
+
+<header class="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
+  <div class="container mx-auto px-4 py-4">
+    <nav class="flex items-center justify-between">
+      <a href="/" class="text-2xl font-bold text-secondary">
+        NG STHLM AB
+      </a>
+      
+      <div class="hidden md:flex space-x-8">
+        {navItems.map(item => (
+          <a 
+            href={item.href}
+            class="text-secondary hover:text-primary transition-colors text-sm uppercase tracking-wider"
+          >
+            {item.text}
+          </a>
+        ))}
+      </div>
+
+      <button 
+        id="menuButton"
+        class="md:hidden text-secondary p-2 focus:outline-none"
+        aria-label="Meny"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </nav>
+
+    <div id="mobileMenu" class="hidden md:hidden fixed left-0 right-0 top-[73px] bg-white/95 backdrop-blur-sm shadow-lg">
+      <nav class="container mx-auto px-4 py-4">
+        {navItems.map(item => (
+          <a 
+            href={item.href}
+            class="block py-3 text-secondary hover:text-primary transition-colors text-sm uppercase tracking-wider border-b border-gray-100 last:border-0"
+          >
+            {item.text}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="h-[73px]"></div>
+
+<script>
+  const menuButton = document.getElementById('menuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  menuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!menuButton?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {
+      mobileMenu?.classList.add('hidden');
+    }
+  });
+
+  // Close menu when clicking a link
+  const menuLinks = mobileMenu?.querySelectorAll('a');
+  menuLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>

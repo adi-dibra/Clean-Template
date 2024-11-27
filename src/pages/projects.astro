@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const categories = ["Alla", ...new Set(projects.map(project => project.data.category))];
+
+const stats = [
+  { number: "98%", label: "Nöjda Kunder" },
+  { number: "150+", label: "Genomförda Projekt" },
+  { number: "5+", label: "Aktiva Projekt" },
+  { number: "15+", label: "Medarbetare" }
+];
+
+const featuredReviews = [
+  {
+    quote: "They deliver according to plans, are very flexible and solution oriented, even on issues created by others for whicy they did not have any accountability for. Its easy to communicate with them and I always felt I could trust them throughout the whole process from offer to end result, which was great.",
+    author: "Jacobus",
+    role: "Byggnation av nytt badrum 3 kvm i Stockholm",
+    rating: 5
+  },
+  {
+    quote: "Riktigt nöjd med vårt nya drömbadrum. Mycket hög service. Vår projektledare Noli var en dröm. Han var mycket social, trevlig, snabb, lösningsorienterad och trygg att jobba med. Man märkte att han hade mycket erfarenhet och han rekommenderade många bra lösningar. Vi kommer definitivt att anlita NG igen. 😍",
+    author: "Sulay",
+    role: "Total badrumsrenovering 4 kvm i Solna",
+    rating: 5
+  },
+{
+  quote: "Gjorde badrummet större och totalrenoverade. Väldigt trevlig och professionell personal, Kenan som äger företaget är väldigt engagerad från början till slut och dyker det upp problem kan man lita på att han/de kommer lösa det. Vi kände oss trygga och valde att anlita dem för andra saker också när vi såg att de var att lita på samt var så kompetenta.",
+  author: "Lina",
+  role: "Total badrumsrenovering 5 kvm i Upplands Väsby",
+  rating: 5
+}
+
+];
+---
+
+<Layout title="Våra Projekt - NG STHLM AB">
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-secondary text-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl" data-aos="fade-up">
+        <h1 class="text-5xl font-bold mb-6">Våra Projekt</h1>
+        <p class="text-xl text-gray-300">
+          Utforska vår portfölj av framgångsrika byggprojekt i Stockholm
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-16 bg-accent">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        {stats.map(stat => (
+          <div data-aos="fade-up">
+            <div class="text-4xl font-bold text-secondary mb-2">{stat.number}</div>
+            <div class="text-gray-600">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Reviews Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl font-bold text-secondary mb-4">Vad Våra Kunder Säger</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+          Läs vad några av våra nöjda kunder har att säga om att arbeta med NG STHLM AB
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
+        {featuredReviews.map(review => (
+          <div class="bg-gray-50 p-8 rounded-lg shadow-lg" data-aos="fade-up">
+            <!-- Rating Stars -->
+            <div class="flex mb-4">
+              {Array.from({ length: review.rating }).map(() => (
+                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+            
+            <blockquote class="text-gray-700 mb-6 italic">"{review.quote}"</blockquote>
+            
+            <div class="flex items-center">
+              
+              <div>
+                <div class="font-semibold text-secondary">{review.author}</div>
+                <div class="text-gray-600 text-sm">{review.role}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center">
+        <a
+          href="/reviews"
+          class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-none transition-colors"
+        >
+          Se Alla Recensioner
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <!-- Category Filter -->
+      <div class="flex flex-wrap gap-4 mb-12 justify-center" data-aos="fade-up">
+        {categories.map(category => (
+          <button
+            class="category-filter px-6 py-2 rounded-full border border-gray-300 hover:border-primary hover:text-primary transition-colors"
+            data-category={category}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      <!-- Projects Grid 
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+        {projects.map(project => (
+          <a 
+            href={`/projects/${project.slug}`}
+            class="group project-item"
+            data-aos="fade-up"
+            data-category={project.data.category}
+          >
+            <div class="relative overflow-hidden rounded-lg shadow-lg">
+              <img
+                src={project.data.image}
+                alt={project.data.title}
+                class="w-full h-64 object-cover transition-transform group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 text-white">
+                <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                  <div class="text-sm text-primary mb-1">{project.data.category}</div>
+                  <h3 class="text-xl font-semibold mb-2">{project.data.title}</h3>
+                  <div class="text-sm text-gray-300 mb-2">
+                    {project.data.location} | {project.data.year}
+                  </div>
+                  <p class="text-sm text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity">
+                    {project.data.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>-->
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Enhanced filter functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.category-filter');
+    const projectItems = document.querySelectorAll('.project-item');
+    const projectsGrid = document.getElementById('projectsGrid');
+
+    // Set initial active state
+    const defaultButton = document.querySelector('[data-category="Alla"]');
+    defaultButton?.classList.add('bg-primary', 'text-white');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        
+        // Update active button state
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-white');
+          btn.classList.add('hover:text-primary');
+        });
+        button.classList.add('bg-primary', 'text-white');
+        button.classList.remove('hover:text-primary');
+
+        // Animate grid items
+        projectItems.forEach(item => {
+          const itemCategory = item.getAttribute('data-category');
+          if (category === 'Alla' || itemCategory === category) {
+            item.style.display = 'block';
+            item.style.opacity = '0';
+            setTimeout(() => {
+              item.style.opacity = '1';
+            }, 50);
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

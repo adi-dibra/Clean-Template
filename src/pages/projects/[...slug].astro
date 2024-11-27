@@ -1,0 +1,338 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const { title, description, category, location, year, image, client, area, duration, services, gallery = [], testimonials = [] } = project.data;
+---
+
+<Layout title={`${title} - NG STHLM AB`} description={description}>
+  <article class="prose-custom">
+    <!-- Hero Section -->
+    <div class="relative h-[70vh] min-h-[500px]">
+      <img
+        src={image}
+        alt={title}
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
+      <div class="absolute inset-0 flex items-center">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl text-white" data-aos="fade-up">
+            <p class="text-primary mb-4 uppercase tracking-wider">{category}</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">{title}</h1>
+            <p class="text-xl text-gray-200 leading-relaxed">{description}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="bg-accent py-8 border-b border-gray-200">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {area && (
+            <div class="text-center">
+              <div class="text-2xl font-bold text-secondary mb-1">{area}</div>
+              <div class="text-gray-600 text-sm uppercase tracking-wider">Total Yta</div>
+            </div>
+          )}
+          {duration && (
+            <div class="text-center">
+              <div class="text-2xl font-bold text-secondary mb-1">{duration}</div>
+              <div class="text-gray-600 text-sm uppercase tracking-wider">Projekttid</div>
+            </div>
+          )}
+          <div class="text-center">
+            <div class="text-2xl font-bold text-secondary mb-1">{year}</div>
+            <div class="text-gray-600 text-sm uppercase tracking-wider">Färdigställt</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-secondary mb-1">{services?.length || 0}</div>
+            <div class="text-gray-600 text-sm uppercase tracking-wider">Tjänster</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12">
+      <div class="grid md:grid-cols-3 gap-12">
+        <!-- Project Content -->
+        <div class="md:col-span-2">
+          <!-- Gallery -->
+          {gallery && gallery.length > 0 && (
+            <div class="mb-12" data-aos="fade-up">
+              <h2 class="text-3xl font-bold text-secondary mb-6">Projektgalleri</h2>
+              <div class="grid grid-cols-2 gap-4" id="gallery">
+                {gallery.map((img, index) => (
+                  <div class="cursor-pointer gallery-item">
+                    <img
+                      src={img.url}
+                      alt={img.alt || `Bild ${index + 1}`}
+                      class="w-full h-64 object-cover rounded-lg shadow-lg hover:opacity-90 transition-opacity"
+                      data-index={index}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Project Description -->
+          <div class="prose-custom max-w-none" data-aos="fade-up">
+            <Content />
+          </div>
+
+          <!-- Testimonials -->
+          {testimonials && testimonials.length > 0 && (
+            <div class="mt-16" data-aos="fade-up">
+              <h2 class="text-3xl font-bold text-secondary mb-8">Vad Kunden Säger</h2>
+              <div class="space-y-6">
+                {testimonials.map(testimonial => (
+                  <div class="bg-white p-8 rounded-lg shadow-lg border-l-4 border-primary">
+                    <p class="text-gray-700 italic text-lg mb-6 leading-relaxed">{testimonial.quote}</p>
+                    <div class="flex items-center">
+                      {testimonial.avatar && (
+                        <img
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                          class="w-12 h-12 rounded-full mr-4 object-cover"
+                        />
+                      )}
+                      <div>
+                        <div class="font-semibold text-secondary">{testimonial.name}</div>
+                        <div class="text-gray-600 text-sm">{testimonial.role}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-8">
+          <!-- Project Details -->
+          <div class="bg-gray-50 p-8 rounded-lg shadow-lg" data-aos="fade-left">
+            <h3 class="text-2xl font-bold text-secondary mb-6">Projektdetaljer</h3>
+            <dl class="space-y-6">
+              <div>
+                <dt class="text-gray-600 text-sm uppercase tracking-wider mb-1">Plats</dt>
+                <dd class="font-semibold text-lg">{location}</dd>
+              </div>
+              <div>
+                <dt class="text-gray-600 text-sm uppercase tracking-wider mb-1">År</dt>
+                <dd class="font-semibold text-lg">{year}</dd>
+              </div>
+              {client && (
+                <div>
+                  <dt class="text-gray-600 text-sm uppercase tracking-wider mb-1">Kund</dt>
+                  <dd class="font-semibold text-lg">{client}</dd>
+                </div>
+              )}
+              {area && (
+                <div>
+                  <dt class="text-gray-600 text-sm uppercase tracking-wider mb-1">Yta</dt>
+                  <dd class="font-semibold text-lg">{area}</dd>
+                </div>
+              )}
+              {duration && (
+                <div>
+                  <dt class="text-gray-600 text-sm uppercase tracking-wider mb-1">Projekttid</dt>
+                  <dd class="font-semibold text-lg">{duration}</dd>
+                </div>
+              )}
+            </dl>
+          </div>
+
+          <!-- Services -->
+          {services && (
+            <div class="bg-gray-50 p-8 rounded-lg shadow-lg" data-aos="fade-left">
+              <h3 class="text-2xl font-bold text-secondary mb-6">Tjänster</h3>
+              <ul class="space-y-4">
+                {services.map(service => (
+                  <li class="flex items-center text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-3" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-lg">{service}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Contact CTA -->
+          <div class="bg-secondary p-8 rounded-lg shadow-lg text-white" data-aos="fade-left">
+            <h3 class="text-2xl font-bold mb-4">Intresserad av liknande projekt?</h3>
+            <p class="text-gray-300 mb-6 leading-relaxed">
+              Låt oss diskutera hur vi kan hjälpa dig förverkliga din vision.
+            </p>
+            <a
+              href="/contact"
+              class="block text-center bg-primary hover:bg-primary/90 text-white px-6 py-4 rounded-lg transition-colors text-lg font-semibold"
+            >
+              Kontakta Oss
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Image Gallery Modal -->
+  <div id="galleryModal" class="fixed inset-0 bg-black/90 z-50 hidden">
+    <button id="closeModal" class="absolute top-4 right-4 text-white p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <button id="prevImage" class="absolute left-4 top-1/2 -translate-y-1/2 text-white p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button id="nextImage" class="absolute right-4 top-1/2 -translate-y-1/2 text-white p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+    <div class="h-full flex items-center justify-center p-4">
+      <img id="modalImage" src="" alt="" class="max-h-full max-w-full object-contain" />
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  .prose-custom {
+    @apply text-gray-700;
+  }
+  
+  .prose-custom h1 {
+    @apply text-4xl font-bold text-secondary mb-8 leading-tight;
+  }
+
+  .prose-custom h2 {
+    @apply text-3xl font-bold text-secondary mt-12 mb-6 leading-tight;
+  }
+
+  .prose-custom h3 {
+    @apply text-2xl font-bold text-secondary mt-8 mb-4;
+  }
+
+  .prose-custom p {
+    @apply text-lg leading-relaxed mb-6;
+  }
+
+  .prose-custom ul {
+    @apply space-y-4 my-6;
+  }
+
+  .prose-custom li {
+    @apply flex items-start;
+  }
+
+  .prose-custom li:before {
+    content: "•";
+    @apply text-primary mr-3 font-bold;
+  }
+
+  .prose-custom strong {
+    @apply text-secondary font-semibold;
+  }
+
+  .prose-custom blockquote {
+    @apply border-l-4 border-primary pl-6 my-8 italic text-gray-600;
+  }
+
+  .prose-custom a {
+    @apply text-primary hover:text-primary/80 transition-colors;
+  }
+
+  /* Specific list styling for project features */
+  .prose-custom ul ul {
+    @apply ml-6 mt-2;
+  }
+
+  .prose-custom ul ul li:before {
+    content: "◦";
+  }
+
+  /* Section spacing */
+  .prose-custom > section {
+    @apply mb-12;
+  }
+
+  /* Table styling */
+  .prose-custom table {
+    @apply w-full my-8;
+  }
+
+  .prose-custom th {
+    @apply bg-gray-50 text-left p-4 font-semibold text-secondary;
+  }
+
+  .prose-custom td {
+    @apply p-4 border-b border-gray-200;
+  }
+</style>
+
+<script>
+  // Gallery functionality
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const modal = document.getElementById('galleryModal');
+  const modalImage = document.getElementById('modalImage');
+  const closeButton = document.getElementById('closeModal');
+  const prevButton = document.getElementById('prevImage');
+  const nextButton = document.getElementById('nextImage');
+  let currentImageIndex = 0;
+
+  function showImage(index) {
+    const images = document.querySelectorAll('.gallery-item img');
+    currentImageIndex = index;
+    modalImage.src = images[index].src;
+    modalImage.alt = images[index].alt;
+  }
+
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      showImage(index);
+    });
+  });
+
+  closeButton?.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  prevButton?.addEventListener('click', () => {
+    const images = document.querySelectorAll('.gallery-item img');
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    showImage(currentImageIndex);
+  });
+
+  nextButton?.addEventListener('click', () => {
+    const images = document.querySelectorAll('.gallery-item img');
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    showImage(currentImageIndex);
+  });
+
+  // Close modal on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modal.classList.add('hidden');
+    }
+  });
+</script>

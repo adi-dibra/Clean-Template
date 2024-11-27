@@ -1,0 +1,223 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+  {
+    title: "Kommersiellt Byggande",
+    description:
+      "Heltäckande kommersiella byggtjänster inklusive kontorsbyggnader, butikslokaler och industrianläggningar.",
+    features: [
+      "Skräddarsydda kontorslokaler",
+      "Butiks- och restauranglokaler",
+      "Industrianläggningar",
+      "Lagerbyggnader",
+      "Företagslokaler",
+    ],
+    image: "bild6.webp",
+  },
+  {
+    title: "Bostadsbyggande",
+    description:
+      "Expert på bostadsbyggande för både villor och flerfamiljshus.",
+    features: [
+      "Nybyggnation av villor",
+      "Flerfamiljshus",
+      "Hållbara bostadsprojekt",
+    ],
+    image: "bild5.webp",
+  },
+  {
+    title: "Renovering & Ombyggnad",
+    description:
+      "Omfattande renoverings- och ombyggnadstjänster för både bostäder och kommersiella fastigheter.",
+    features: [
+      "Totalrenovering av bostäder",
+      "Kök och badrumsrenovering",
+      "Kontorsrenovering",
+      "Tillbyggnader",
+    ],
+    image: "bild7.webp",
+  },
+];
+
+const specializedServices = [
+  {
+    title: "El & VVS",
+    features: [
+      "Elinstallationer",
+      "Värmesystem",
+      "Ventilation",
+      "Vatteninstallationer",
+      "Energioptimering",
+    ],
+  },
+  {
+    title: "Snickeri & Måleri",
+    features: [
+      "Specialsnickerier",
+      "Invändig målning",
+      "Fasadmålning",
+      "Tapetsering",
+      "Fönsterrenovering",
+    ],
+  },
+  {
+    title: "Golv & Betong",
+    features: [
+      "Golvläggning",
+      "Betongarbeten",
+      "Platsgjutning",
+      "Golvslipning",
+      "Epoxygolv",
+    ],
+  },
+  {
+    title: "Badrum & Kök",
+    features: [
+      "Badrumsrenovering",
+      "Köksrenovering",
+      "Tätskikt",
+      "Kakel och klinker",
+      "VVS-installationer",
+    ],
+  },
+];
+---
+
+<Layout title="Våra Tjänster - NG STHLM AB">
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-secondary text-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl" data-aos="fade-up">
+        <h1 class="text-5xl font-bold mb-6">Våra Tjänster</h1>
+        <p class="text-xl text-gray-300">
+          Från idé till verklighet – vi gör dina byggdrömmar möjliga
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Services -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="space-y-20">
+        {
+          services.map((service, index) => (
+            <div
+              class="grid md:grid-cols-2 gap-12 items-center"
+              data-aos="fade-up"
+            >
+              <div class={index % 2 === 0 ? "order-1" : "order-1 md:order-2"}>
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  class="rounded-lg shadow-lg w-full h-[400px] object-cover"
+                />
+              </div>
+              <div class={index % 2 === 0 ? "order-2" : "order-2 md:order-1"}>
+                <h2 class="text-3xl font-bold text-secondary mb-4">
+                  {service.title}
+                </h2>
+                <p class="text-gray-600 mb-6">{service.description}</p>
+                <ul class="space-y-3">
+                  {service.features.map((feature) => (
+                    <li class="flex items-center text-gray-700">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-5 h-5 text-primary mr-3"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M4.5 12.75l6 6 9-13.5"
+                        />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialized Services -->
+  <section class="py-20 bg-accent">
+    <div class="container mx-auto px-4">
+      <h2
+        class="text-3xl font-bold text-secondary mb-12 text-center"
+        data-aos="fade-up"
+      >
+        Specialiserade Tjänster
+      </h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {
+          specializedServices.map((service) => (
+            <div class="bg-white p-8 rounded-lg shadow-lg" data-aos="fade-up">
+              <h3 class="text-xl font-bold text-secondary mb-4">
+                {service.title}
+              </h3>
+              <ul class="space-y-3">
+                {service.features.map((feature) => (
+                  <li class="flex items-center text-gray-700">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-5 h-5 text-primary mr-3"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+        <h2 class="text-3xl font-bold text-secondary mb-6">
+          Redo att Starta Ditt Projekt?
+        </h2>
+        <p class="text-gray-600 mb-8">
+          Kontakta oss idag för en detaljerad konsultation om dina byggbehov.
+          Vårt expertteam är redo att förverkliga din vision.
+        </p>
+        <div class="flex justify-center gap-4">
+          <a
+            href="/contact"
+            class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-none transition-colors"
+          >
+            Få en Offert
+          </a>
+          <a
+            href="/projects"
+            class="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-none transition-colors"
+          >
+            Se Våra Projekt
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
