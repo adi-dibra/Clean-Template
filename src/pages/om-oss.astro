@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const team = [
+  {
+    name: "Ledningsposition",
+    role: "VD",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500",
+    description: "Expert med över 15 års branscherfarenhet av att leda strategiska initiativ."
+  },
+  {
+    name: "Specialistroll",
+    role: "Projektledare",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500",
+    description: "Certifierad specialist inom projektleverans och teamkoordinering."
+  },
+  {
+    name: "Teknisk Expert",
+    role: "Systemarkitekt",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500",
+    description: "Erfaren utvecklare med fokus på molnlösningar och systemintegration."
+  },
+  {
+    name: "Digital Strateg",
+    role: "Marknadschef",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500",
+    description: "Innovativ marknadsförare med expertis inom digital transformation."
+  }
+];
+
+const certifications = [
+  {
+    name: "ISO 9001",
+    description: "Internationell standard för kvalitetsledningssystem.",
+    icon: "🏆"
+  },
+  {
+    name: "ISO 27001",
+    description: "Certifiering för informationssäkerhet.",
+    icon: "🔒"
+  },
+  {
+    name: "Branschpris 2023",
+    description: "Utmärkelse för innovation och kundnöjdhet.",
+    icon: "🌟"
+  },
+  {
+    name: "Miljöcertifikat",
+    description: "Erkännande för hållbara affärsmetoder.",
+    icon: "🌱"
+  }
+];
+
+const values = [
+  {
+    title: "Kärnvärde 1",
+    description: "Engagemang för excellens och kontinuerlig förbättring.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+    </svg>`
+  }
+];
+---
+
+<Layout title="Om Oss">
+  <section class="relative py-20 bg-secondary text-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl" data-aos="fade-up">
+        <h1 class="text-5xl font-bold mb-6">Om Oss</h1>
+        <p class="text-xl text-gray-300">
+          Leder innovation genom expertis, teknik och hållbara lösningar
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div data-aos="fade-right">
+          <img
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800"
+            alt="Företagshistoria"
+            class="rounded-lg shadow-lg"
+          />
+        </div>
+        <div data-aos="fade-left">
+          <h2 class="text-3xl font-bold text-secondary mb-6">Vår Historia</h2>
+          <p class="text-gray-600 mb-4">
+            Grundat med en vision att förändra branschen genom innovation och excellens, förenar vårt företag expertis med banbrytande lösningar.
+          </p>
+          <p class="text-gray-600 mb-4">        
+            Vi strävar efter att vara branschledande genom att ständigt utvecklas och anpassa oss till ny teknik samtidigt som vi upprätthåller vårt åtagande för kvalitet och kundnöjdhet.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-secondary text-center mb-12" data-aos="fade-up">
+        Vårt Team
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        {team.map(member => (
+          <div class="bg-white p-8 rounded-lg shadow-md" data-aos="fade-up">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+              <img
+                src={member.image}
+                alt={member.name}
+                class="w-40 h-48 object-cover rounded-lg shadow-sm"
+              />
+              <div>
+                <h3 class="text-xl font-semibold text-secondary">{member.name}</h3>
+                <p class="text-primary font-medium">{member.role}</p>
+                <p class="text-gray-600 mt-2">{member.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section class="py-20 bg-accent">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-secondary text-center mb-12" data-aos="fade-up">
+        Certifieringar & Utmärkelser
+      </h2>
+      <div class="grid md:grid-cols-4 gap-8">
+        {certifications.map(cert => (
+          <div class="bg-white p-6 rounded-lg shadow-lg text-center" data-aos="fade-up">
+            <div class="text-4xl mb-4">{cert.icon}</div>
+            <h3 class="text-xl font-semibold text-secondary mb-2">{cert.name}</h3>
+            <p class="text-gray-600 mb-2">{cert.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Rest of the existing sections... -->
+</Layout>

@@ -6,32 +6,31 @@ const projects = await getCollection('projects');
 const categories = ["Alla", ...new Set(projects.map(project => project.data.category))];
 
 const stats = [
-  { number: "98%", label: "Nöjda Kunder" },
-  { number: "150+", label: "Genomförda Projekt" },
-  { number: "5+", label: "Aktiva Projekt" },
-  { number: "15+", label: "Medarbetare" }
+  { number: "100+", label: "Genomförda Projekt" },
+  { number: "50+", label: "Aktiva Projekt" },
+  { number: "25+", label: "Medarbetare" },
+  { number: "95%", label: "Nöjda Kunder" }
 ];
 
 const featuredReviews = [
   {
-    quote: "They deliver according to plans, are very flexible and solution oriented, even on issues created by others for whicy they did not have any accountability for. Its easy to communicate with them and I always felt I could trust them throughout the whole process from offer to end result, which was great.",
-    author: "Jacobus",
-    role: "Byggnation av nytt badrum 3 kvm i Stockholm",
+    quote: "Ett mycket positivt omdöme om företagets tjänster och professionalism.",
+    author: "Kund A",
+    role: "Projekt i Stockholm",
     rating: 5
   },
   {
-    quote: "Riktigt nöjd med vårt nya drömbadrum. Mycket hög service. Vår projektledare Noli var en dröm. Han var mycket social, trevlig, snabb, lösningsorienterad och trygg att jobba med. Man märkte att han hade mycket erfarenhet och han rekommenderade många bra lösningar. Vi kommer definitivt att anlita NG igen. 😍",
-    author: "Sulay",
-    role: "Total badrumsrenovering 4 kvm i Solna",
+    quote: "En detaljerad beskrivning av kundens positiva erfarenheter med företaget.",
+    author: "Kund B",
+    role: "Projekt i Solna",
     rating: 5
   },
-{
-  quote: "Gjorde badrummet större och totalrenoverade. Väldigt trevlig och professionell personal, Kenan som äger företaget är väldigt engagerad från början till slut och dyker det upp problem kan man lita på att han/de kommer lösa det. Vi kände oss trygga och valde att anlita dem för andra saker också när vi såg att de var att lita på samt var så kompetenta.",
-  author: "Lina",
-  role: "Total badrumsrenovering 5 kvm i Upplands Väsby",
-  rating: 5
-}
-
+  {
+    quote: "Ett tredje positivt omdöme om företagets service och kvalitet.",
+    author: "Kund C",
+    role: "Projekt i Uppsala",
+    rating: 5
+  }
 ];
 ---
 
@@ -123,7 +122,7 @@ const featuredReviews = [
         ))}
       </div>
 
-      <!-- Projects Grid 
+      <!-- Projects Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
         {projects.map(project => (
           <a 
@@ -153,7 +152,7 @@ const featuredReviews = [
             </div>
           </a>
         ))}
-      </div>-->
+      </div>
     </div>
   </section>
 </Layout>
@@ -185,13 +184,13 @@ const featuredReviews = [
         projectItems.forEach(item => {
           const itemCategory = item.getAttribute('data-category');
           if (category === 'Alla' || itemCategory === category) {
-            item.style.display = 'block';
-            item.style.opacity = '0';
+            (item as HTMLElement).style.display = 'block';
+            (item as HTMLElement).style.opacity = '0';
             setTimeout(() => {
-              item.style.opacity = '1';
+              (item as HTMLElement).style.opacity = '1';
             }, 50);
           } else {
-            item.style.display = 'none';
+            (item as HTMLElement).style.display = 'none';
           }
         });
       });

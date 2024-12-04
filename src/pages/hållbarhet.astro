@@ -3,41 +3,41 @@ import Layout from '../layouts/Layout.astro';
 
 const initiatives = [
   {
-    title: "Barncancerfonden",
-    description: "Vi donerar årligen till Barncancerfonden för att stödja forskning och stöd till drabbade familjer.",
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800",
+    title: "Samhällsinitiativ",
+    description: "Beskrivning av vårt engagemang i samhällsutveckling och sociala projekt.",
+    image: "initiative1.jpg",
     type: "social"
   },
   {
-    title: "Klimatneutral 2030",
-    description: "Vårt åtagande att bli klimatneutrala till 2030 genom omfattande åtgärder i hela vår verksamhet.",
-    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800",
+    title: "Miljöarbete",
+    description: "Beskrivning av våra miljömål och hållbarhetsarbete.",
+    image: "initiative2.jpg",
     type: "environmental"
   },
   {
-    title: "Hållbara Material",
-    description: "Vi använder enbart miljöcertifierade och hållbart producerade byggmaterial i våra projekt.",
-    image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=800",
+    title: "Hållbar Utveckling",
+    description: "Beskrivning av våra metoder för hållbart byggande.",
+    image: "initiative3.jpg",
     type: "environmental"
   }
 ];
 
 const environmentalStats = [
-  { number: "45%", label: "Minskade CO2-utsläpp sedan 2020" },
-  { number: "80%", label: "Återvunnet byggmaterial" },
-  { number: "100%", label: "Förnybar energi på byggarbetsplatser" },
-  { number: "0", label: "Deponi från våra projekt" }
+  { number: "25%", label: "Energibesparing" },
+  { number: "50%", label: "Återvunnet Material" },
+  { number: "80%", label: "Förnybar Energi" },
+  { number: "40%", label: "Minskad Miljöpåverkan" }
 ];
 ---
 
-<Layout title="Hållbarhet & Samhällsansvar - NG STHLM AB">
+<Layout title="Hållbarhet & Samhällsansvar">
   <!-- Hero Section -->
   <section class="relative py-20 bg-secondary text-white">
     <div class="container mx-auto px-4">
       <div class="max-w-3xl" data-aos="fade-up">
         <h1 class="text-5xl font-bold mb-6">Hållbarhet & Samhällsansvar</h1>
         <p class="text-xl text-gray-300">
-          Vi bygger inte bara hus - vi bygger en hållbar framtid för kommande generationer
+          Vi skapar hållbara lösningar för framtiden
         </p>
       </div>
     </div>
@@ -55,9 +55,9 @@ const environmentalStats = [
           />
         </div>
         <div data-aos="fade-left">
-          <h2 class="text-3xl font-bold text-secondary mb-6">Vårt Miljöansvar</h2>
+          <h2 class="text-3xl font-bold text-secondary mb-6">Miljöansvar</h2>
           <p class="text-gray-600 mb-6">
-            På NG STHLM AB ser vi det som vår plikt att leda byggbranschens omställning mot en mer hållbar framtid. Genom innovativa metoder och noggranna materialval minimerar vi vår miljöpåverkan i varje projekt.
+            Vi arbetar aktivt med att minska vår miljöpåverkan genom moderna metoder och noggranna materialval. Hållbarhet är en central del i vår verksamhet.
           </p>
           <ul class="space-y-4">
             <li class="flex items-start">
@@ -129,7 +129,7 @@ const environmentalStats = [
   <!-- Certifications -->
   <section class="py-20">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-secondary mb-12" data-aos="fade-up">Miljöcertifieringar</h2>
+      <h2 class="text-3xl font-bold text-secondary mb-12" data-aos="fade-up">Certifieringar</h2>
       <div class="grid md:grid-cols-3 gap-8">
         <div class="p-6 bg-white rounded-lg shadow-lg" data-aos="fade-up">
           <img
@@ -137,8 +137,8 @@ const environmentalStats = [
             alt="BREEAM Certifiering"
             class="w-24 h-24 mx-auto mb-4 rounded-full object-cover"
           />
-          <h3 class="text-xl font-bold text-secondary mb-2">BREEAM Excellent</h3>
-          <p class="text-gray-600">Högsta betyg för hållbart byggande</p>
+          <h3 class="text-xl font-bold text-secondary mb-2">Miljöcertifiering A</h3>
+          <p class="text-gray-600">Certifiering för hållbart byggande</p>
         </div>
         <div class="p-6 bg-white rounded-lg shadow-lg" data-aos="fade-up">
           <img
@@ -146,8 +146,8 @@ const environmentalStats = [
             alt="ISO Certifiering"
             class="w-24 h-24 mx-auto mb-4 rounded-full object-cover"
           />
-          <h3 class="text-xl font-bold text-secondary mb-2">ISO 14001</h3>
-          <p class="text-gray-600">Certifierat miljöledningssystem</p>
+          <h3 class="text-xl font-bold text-secondary mb-2">Miljöcertifiering B</h3>
+          <p class="text-gray-600">Certifierat ledningssystem</p>
         </div>
         <div class="p-6 bg-white rounded-lg shadow-lg" data-aos="fade-up">
           <img
@@ -155,8 +155,8 @@ const environmentalStats = [
             alt="Svanen Certifiering"
             class="w-24 h-24 mx-auto mb-4 rounded-full object-cover"
           />
-          <h3 class="text-xl font-bold text-secondary mb-2">Svanen</h3>
-          <p class="text-gray-600">Miljömärkt byggprocess</p>
+          <h3 class="text-xl font-bold text-secondary mb-2">Miljöcertifiering C</h3>
+          <p class="text-gray-600">Miljömärkt verksamhet</p>
         </div>
       </div>
     </div>
